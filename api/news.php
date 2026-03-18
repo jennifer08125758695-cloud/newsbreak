@@ -86,7 +86,7 @@ echo json_encode($result);
 function fetchFromNewsAPI($category, $query, $page, $pageSize) {
     if ($query) {
         $url = 'https://newsapi.org/v2/everything?'
-             . 'q=' . urlencode($query)
+             . 'q=' . urlencode($query . ' USA')
              . '&language=en'
              . '&sortBy=publishedAt'
              . '&page=' . $page
@@ -141,14 +141,14 @@ function fetchFromGNews($category, $query, $page, $pageSize) {
     if ($query) {
         $url = 'https://gnews.io/api/v4/search?'
              . 'q=' . urlencode($query)
-             . '&lang=en'
+             . '&lang=en&country=us'
              . '&max=' . $pageSize
              . '&page=' . $page
              . '&token=' . GNEWS_KEY;
     } else {
         $url = 'https://gnews.io/api/v4/top-headlines?'
              . 'category=' . $gnewsCat
-             . '&lang=en'
+             . '&lang=en&country=us'
              . '&max=' . $pageSize
              . '&page=' . $page
              . '&token=' . GNEWS_KEY;
@@ -179,13 +179,13 @@ function fetchFromGNews($category, $query, $page, $pageSize) {
 // ============================================================
 function fetchFromRSS($category, $query) {
     $rssFeeds = [
-        'general'       => 'https://feeds.bbci.co.uk/news/rss.xml',
-        'technology'    => 'https://feeds.bbci.co.uk/news/technology/rss.xml',
-        'business'      => 'https://feeds.bbci.co.uk/news/business/rss.xml',
-        'health'        => 'https://feeds.bbci.co.uk/news/health/rss.xml',
-        'entertainment' => 'https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml',
-        'sports'        => 'https://feeds.bbci.co.uk/sport/rss.xml',
-        'science'       => 'https://feeds.bbci.co.uk/news/science_and_environment/rss.xml',
+        'general'       => 'https://feeds.npr.org/1001/rss.xml',
+        'technology'    => 'https://feeds.npr.org/1019/rss.xml',
+        'business'      => 'https://feeds.npr.org/1006/rss.xml',
+        'health'        => 'https://feeds.npr.org/1128/rss.xml',
+        'entertainment' => 'https://feeds.npr.org/1008/rss.xml',
+        'sports'        => 'https://feeds.npr.org/1055/rss.xml',
+        'science'       => 'https://feeds.npr.org/1007/rss.xml',
     ];
 
     $feedUrl = $rssFeeds[$category] ?? $rssFeeds['general'];
@@ -226,9 +226,9 @@ function fetchFromRSS($category, $query) {
             'content'     => strip_tags((string)$item->description),
             'url'         => (string)$item->link,
             'image'       => $image,
-            'source'      => 'BBC News',
+            'source'      => 'NPR News',
             'publishedAt' => (string)$item->pubDate,
-            'author'      => 'BBC News',
+            'author'      => 'NPR News',
         ];
 
         if (count($articles) >= 20) break;

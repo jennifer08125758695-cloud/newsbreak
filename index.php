@@ -253,7 +253,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© <?php echo date('Y'); ?> NewsBreak. News powered by <a href="https://newsapi.org" target="_blank" rel="noopener">NewsAPI</a> &amp; BBC RSS.</p>
+    <p>© <?php echo date('Y'); ?> NewsBreak. USA news powered by <a href="https://newsapi.org" target="_blank" rel="noopener">NewsAPI</a> &amp; <a href="https://npr.org" target="_blank" rel="noopener">NPR News</a>.</p>
   </div>
 </footer>
 
